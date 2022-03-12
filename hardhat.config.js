@@ -24,6 +24,12 @@ module.exports = {
       accounts: {
         mnemonic: "test test test test test test test test test test test junk"
       }
+    },
+    "optimism": {
+      url: "https://mainnet.optimism.io",
+      accounts: {
+        mnemonic: "test test test test test test test test test test test junk"
+      }
     }
   }
 };

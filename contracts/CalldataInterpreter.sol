@@ -58,14 +58,34 @@ contract CalldataInterpreter {
                 token.balanceOf(address(this)));
         }
 
-        // transfer (assume we have an allowance for it)
+        // transfer (no need for allowance)
         if (_func == 2) {
-            token.transferFrom(
+            token.transferProxy(
+                msg.sender, 
+                address(uint160(calldataVal(1, 20))),
+                calldataVal(21, 2)
+            );
+        }
+
+        // approve
+        if (_func == 3) {
+            token.approveProxy(
                 msg.sender,
                 address(uint160(calldataVal(1, 20))),
                 calldataVal(21, 2)
             );
         }
+
+        // transferFrom
+        if (_func == 4) {
+            token.transferFromProxy(
+                msg.sender,
+                address(uint160(calldataVal( 1, 20))),
+                address(uint160(calldataVal(21, 20))),
+                calldataVal(41, 2)
+            );    
+        }
+
     }   // fallback
 
 }       // contract CalldataInterpreter
