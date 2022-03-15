@@ -21,17 +21,12 @@ contract CalldataInterpreter {
 
     function calldataVal(uint startByte, uint length)
         private pure returns (uint) {
-        uint _calldatasize;
         uint _retVal;
-
-        assembly {
-            _calldatasize := calldatasize()
-        }
 
         require(length < 0x21, 
             "calldataVal length limit is 32 bytes");
 
-        require(length + startByte <= _calldatasize,
+        require(length + startByte <= msg.data.length,
             "calldataVal trying to read beyond calldatasize");
 
         assembly {
